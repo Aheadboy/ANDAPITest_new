@@ -1,0 +1,18 @@
+启动方式：start和bind两种
+如果服务与其他启动源在一个进程里这个
+startService，或者bind一个扩展Ibinder的Service
+如果是夸进程的
+start的Service需要在配置文件配上   <!--只有同时加上android:enabled="true" android:exported="true"才可被另一个进程启动-->才有效。
+bind的可以使用Messenger进行夸进程，或者aidl（不推荐，因为麻烦）
+bind通过Messenger同样需要如下：
+ <!--只有同时加上android:enabled="true" android:exported="true"才可被另一个进程启动-->
+<!--不加上android:enabled="true" android:exported="true"会报java.lang.SecurityException: Not allowed to bind to service Intent-->
+
+
+多次startService会多次调用onStartCommand，因为启动源与service的通讯正是通过这个方法。
+但是多次bindService却不会进行多次调用onbind方法，因为他们之间的消息传递是通过IBinder对象，而不是这一次又一次的绑定
+
+
+服务默认是在主线程中，基于服务的特性，他很可能是个耗时操作，那么你几乎应该总是在启用工作子线程来处理
+这个子线程可以是HandleThread。。
+我们也可以通过IntentService实现。这个IntentService默认开启一个工作线程，以队列的形式依次处理每个Intent。

@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context="com.helloworld.andapitest.MainActivity">
+
+    <TextView android:id="@+id/tv_hellowrold"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/hello_world"/>
+    <Button android:layout_below="@+id/tv_hellowrold" android:id="@+id/btn_startService" android:text="startService"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_startService" android:id="@+id/btn_stopService" android:text="stopService"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_stopService" android:id="@+id/btn_startInttService"
+            android:text="startInttService"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_startInttService" android:id="@+id/btn_getbindServiceM1"
+            android:text="getbindServiceM1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_getbindServiceM1" android:id="@+id/btn_getbindServiceM2"
+            android:text="getbindServiceM2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_getbindServiceM2" android:id="@+id/btn_UnbindService"
+            android:text="UnbindService"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_UnbindService" android:id="@+id/btn_bindService"
+            android:text="bindService"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_bindService" android:id="@+id/btn_finishActivity"
+            android:text="finishActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <Button android:layout_below="@+id/btn_finishActivity" android:id="@+id/btn_twoThreadStartConversation"
+            android:text="twoThreadStartConversation"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"/>
+    <LinearLayout android:id="@+id/ll" android:orientation="horizontal" android:layout_below="@+id/btn_twoThreadStartConversation"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+        <Button android:layout_weight="1" android:id="@+id/btn_startSysContentPro"
+                android:text="btn_startSysContentPro"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_height"/>
+        <Spinner android:id="@+id/spn_ANDContentProType" android:layout_weight="1" android:layout_width="0dp"
+                 android:entries="@array/ANDContentProType"
+                 android:layout_height="@dimen/btn_height">
+        </Spinner>
+    </LinearLayout>
+
+    <Button android:layout_below="@+id/ll" android:id="@+id/eventActivity" android:onClick="" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+</RelativeLayout>

@@ -1,0 +1,30 @@
+一个线程只有一个looper和与这个looper相关的messege queue，但是可有多个handle。
+handle到底属于哪个线程，不是取决于在哪个线程实例化。(当然一般而言，handle默认情况下在哪声明就是属于哪个线程。)
+而是与其关联的looper属于哪个线程，这个handle就属于哪个线程。new Handle（thread.getLooper()）
+由此，可知，handle，looper，messege queue都是在一个线程里面的。可以说，handle是一个线程对外通信的接口。
+
+
+线程间通讯，通过Handle来实现。
+通过handleInstance1.sendMessage来将消息发送到handleInstance1所属的线程的消息队列。
+通过重写Handle类的handleMessage来处理消息。
+在handleMessage里面接受到的消息可以通过msg.replyTo.send(Message)向消息发送者返回消息。
+
+looper对消息进行分发，分发的意思是，通过哪个handle发送来的消息，就分发给哪个handle进行处理。
+
+looper.quit()不再接受新的消息。立刻退出，清空非延迟和延迟处理的任务。api 1
+looper.quitsafty()不再接受新的消息。分发完非延迟消息，退出。api 18才有这个方法
+
+Toast不是只有在主线程才可以执行的。Toast是通过Handle发送给系统的NotificationService进行处理。
+那么必要条件是Handle。而不是主线程。
+所以，你如果直接在一个子线程里面Toast，
+报的异常不是说，不能够在非主线程使用Toast，
+而是：java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare
+貌似如果没有handle，Toast自己会去创建一个Handle，但是前提是有looper。
+实际情况也是，在子线程中，只要你在Toast之前looper.prepare(),Toast之后looper.loop()。这个Toast在子线程就能调用。
+至于Toast的Context,随便传一个。
+
+HandleThread 创建了一个线程，并且为你准备了looper。
+使用步骤：1、实例化；2、thread.start();这个线程就工作了。3、new Handle（thread.getLooper()）{ handleMessage{...}}
+如果没有thread.start(),则这个thread.getLooper()返回null
+“ If this thread not been started
+      * or for any reason is isAlive() returns false, this method will return null.”getLooper()函数注释的原话

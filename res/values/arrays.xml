@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ANDContentProType">
+        <item>Contacts</item>
+        <item>Calendar</item>
+        <item>MediaAudio</item>
+        <item>MediaVideo</item>
+        <item>MediaImage</item>
+        <item>AlarmClock</item>
+        <item>Browser</item>
+    </string-array>
+</resources>
